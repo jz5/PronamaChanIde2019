@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VsixLanguagePack Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema-lp/2010">
+  <LocalizedName>プロ生ちゃん IDE</LocalizedName>
+  <LocalizedDescription>プログラミング生放送のキャラクターのプロ生ちゃん（暮井 慧）をテキストエディターの背景に表示します。</LocalizedDescription>
+  <License></License>
+  <MoreInfoUrl>https://kei.pronama.jp/</MoreInfoUrl>
+</VsixLanguagePack>

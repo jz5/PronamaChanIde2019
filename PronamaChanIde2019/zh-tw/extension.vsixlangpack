@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VsixLanguagePack Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema-lp/2010">
+  <LocalizedName>Pronama-chan IDE</LocalizedName>
+  <LocalizedDescription>在背景顯示 Programming Live Program (pronama.jp) 的吉祥物 Pronama-chan (Kurei Kei)</LocalizedDescription>
+  <License></License>
+  <MoreInfoUrl>https://kei.pronama.jp/</MoreInfoUrl>
+</VsixLanguagePack>
