@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using PronamaChanIde2019.Shells;
 
 namespace PronamaChanIde2019
 {
@@ -15,7 +16,7 @@ namespace PronamaChanIde2019
         private readonly double _shellWidth = 200;
         private readonly double _shellHeight = 484.26;
 
-        public BackgroundShell Shell { get; }
+        public NineteenShell Shell { get; }
 
         public ViewportAdornment(IWpfTextView view)
         {
@@ -23,7 +24,7 @@ namespace PronamaChanIde2019
             _view.ViewportHeightChanged += OnSizeChanged; ;
             _view.ViewportWidthChanged += OnSizeChanged;
 
-            Shell = new BackgroundShell
+            Shell = new NineteenShell
             {
                 Opacity = 0.35
             };

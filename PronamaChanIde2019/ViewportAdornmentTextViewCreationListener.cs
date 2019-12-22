@@ -55,7 +55,7 @@ namespace PronamaChanIde2019
         private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
         {
             if (_adornment != null)
-                _adornment.Shell.ChangeFace(Success);
+                _adornment.Shell.ExpressEmotion(Success);
         }
     }
 }
