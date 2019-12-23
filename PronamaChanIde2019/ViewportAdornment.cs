@@ -13,10 +13,12 @@ namespace PronamaChanIde2019
     {
         private readonly IWpfTextView _view;
         private readonly IAdornmentLayer _adornmentLayer;
-        private readonly double _shellWidth = 200;
-        private readonly double _shellHeight = 484.26;
+        private readonly double _shellWidth;
+        private readonly double _shellHeight;
 
-        public NineteenShell Shell { get; }
+        public ICharacterShell Shell { get; }
+        public UserControl ShellControl => (UserControl)Shell;
+
 
         public ViewportAdornment(IWpfTextView view)
         {
@@ -24,28 +26,42 @@ namespace PronamaChanIde2019
             _view.ViewportHeightChanged += OnSizeChanged; ;
             _view.ViewportWidthChanged += OnSizeChanged;
 
-            Shell = new NineteenShell
+            var mode = Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_MODE", EnvironmentVariableTarget.User);
+            if (!string.IsNullOrEmpty(mode))
             {
-                Opacity = 0.35
-            };
+                if (mode == "CLASSIC")
+                    Shell = new ClassicShell();
+            }
+
+            if (Shell == null)
+                Shell = new NineteenShell();
+
+            // Opacity
+            ShellControl.Opacity = 0.4;
 
             if (double.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_OPACITY", EnvironmentVariableTarget.User), out double opactiy))
             {
                 if (0 < opactiy && opactiy <= 1)
-                    Shell.Opacity = opactiy;
+                    (ShellControl).Opacity = opactiy;
             }
 
-            if (double.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_HEIGHT", EnvironmentVariableTarget.User), out double height))
+            // Width, Height
+            var sizeInitialized = false;
+            if (double.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_HEIGHT", EnvironmentVariableTarget.User), out double height) &&
+                height > 0)
             {
-                if (height > 0)
-                {
-                    _shellWidth *= height / _shellHeight;
-                    _shellHeight = height;
+                sizeInitialized = true;
 
-                    Shell.Width = _shellWidth;
-                    Shell.Height = _shellHeight;
-                }
+                _shellWidth *= height / _shellHeight;
+                _shellHeight = height;
             }
+            if (!sizeInitialized)
+            {
+                _shellWidth = Shell.DefaultWidth;
+                _shellHeight = Shell.DefaultHeight;
+            }
+            (ShellControl).Width = _shellWidth;
+            (ShellControl).Height = _shellHeight;
 
             // Grab a reference to the adornment layer that this adornment should be added to
             _adornmentLayer = view.GetAdornmentLayer("Pronama_chanIDE2019");
@@ -56,26 +72,25 @@ namespace PronamaChanIde2019
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
-
             // clear the adornment layer of previous adornments
             _adornmentLayer.RemoveAllAdornments();
 
             // Place the image in the bottom right hand corner of the Viewport
 
-            var w = Shell.ActualWidth;
-            var h = Shell.ActualHeight;
+            var w = (ShellControl).ActualWidth;
+            var h = (ShellControl).ActualHeight;
 
-            if (Shell.ActualWidth == 0)
+            if ((ShellControl).ActualWidth == 0)
             {
                 w = _shellWidth * (_view.ZoomLevel / 100);
                 h = _shellHeight * (_view.ZoomLevel / 100);
             }
 
-            Canvas.SetLeft(Shell, (_view.ViewportRight - w - 10));
-            Canvas.SetTop(Shell, (_view.ViewportBottom - h - 10));
+            Canvas.SetLeft((ShellControl), (_view.ViewportRight - w - 10));
+            Canvas.SetTop((ShellControl), (_view.ViewportBottom - h - 10));
 
             // add the image to the adornment layer and make it relative to the viewport
-            _adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, Shell, null);
+            _adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, (ShellControl), null);
         }
 
     }

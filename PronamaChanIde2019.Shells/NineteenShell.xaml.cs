@@ -50,6 +50,9 @@ namespace PronamaChanIde2019.Shells
         private readonly Random _random = new Random();
         private readonly Dictionary<Images, BitmapImage> _images = new Dictionary<Images, BitmapImage>();
 
+        public double DefaultWidth { get; } = 293.88;
+        public double DefaultHeight { get; } = 500;
+
         public bool EmotionTimerEnabled { get; set; } = true;
 
         public NineteenShell()
