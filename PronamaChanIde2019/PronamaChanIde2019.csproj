@@ -72,14 +72,20 @@
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="16.0.2264" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ja-JP\extension.vsixlangpack" />
+    <Content Include="icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ja-JP\extension.vsixlangpack">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="pronama.ico">
+    <Content Include="zh-tw\extension.vsixlangpack">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="zh-tw\extension.vsixlangpack" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PronamaChanIde2019.Shells\PronamaChanIde2019.Shells.csproj">

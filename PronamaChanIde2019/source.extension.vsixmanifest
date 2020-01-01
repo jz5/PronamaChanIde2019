@@ -3,9 +3,9 @@
     <Metadata>
         <Identity Id="PronamaChanIde2019.0219ca40-44b7-48b6-b43e-af7781a22e1b" Version="2.0" Language="en-US" Publisher="jz5" />
         <DisplayName>Pronama-chan IDE</DisplayName>
-        <Description xml:space="preserve">Display mascot character Pronama-chan of Programming Live Program (pronama.jp) as the background of text editor.</Description>
-        <MoreInfo>https://kei.pronama.jp/</MoreInfo>
-        <Icon>pronama.ico</Icon>
+        <Description xml:space="preserve">Display mascot character Pronama-chan (KUREI Kei) of Programming Live Program (pronama.jp) as the background of text editor.</Description>
+        <MoreInfo>https://kei.pronama.jp/ide</MoreInfo>
+        <Icon>icon.png</Icon>
         <PreviewImage>preview.png</PreviewImage>
         <Tags>theme, Text Editor, 痛IDE拡張, Background</Tags>
     </Metadata>

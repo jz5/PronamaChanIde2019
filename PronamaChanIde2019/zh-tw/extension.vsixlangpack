@@ -2,7 +2,7 @@
 <PackageLanguagePackManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
   <Metadata>
     <DisplayName>Pronama-chan IDE</DisplayName>
-    <Description>在背景顯示 Programming Live Program (pronama.jp) 的吉祥物 Pronama-chan (Kurei Kei)</Description>
-    <MoreInfo>https://kei.pronama.jp/</MoreInfo>
+    <Description>在背景顯示 Programming Live Program (pronama.jp) 的吉祥物 Pronama-chan (KUREI Kei)</Description>
+    <MoreInfo>https://kei.pronama.jp/ide</MoreInfo>
   </Metadata>
 </PackageLanguagePackManifest>
