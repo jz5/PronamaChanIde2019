@@ -76,6 +76,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="ko-KR\extension.vsixlangpack" />
     <Content Include="ja-JP\extension.vsixlangpack">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
