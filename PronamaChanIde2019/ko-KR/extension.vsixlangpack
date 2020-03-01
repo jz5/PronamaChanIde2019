@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageLanguagePackManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <DisplayName>프로나마짱 IDE</DisplayName>
+      <Description>프로그래밍 생방송(pronama.jp)의 캐릭터인 프로나마짱(쿠레이 케이)을 텍스트 편집기의 배경에 표시합니다.</Description>
+      <MoreInfo>https://kei.pronama.jp/ide</MoreInfo>
+    </Metadata>
+</PackageLanguagePackManifest>
