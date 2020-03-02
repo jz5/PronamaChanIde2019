@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace PronamaChanIde2019.Shells
@@ -134,17 +125,17 @@ namespace PronamaChanIde2019.Shells
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private Action ExpressEmotionAfterBlinking;
+        private Action _expressEmotionAfterBlinking;
         public void ExpressEmotion(bool buildSucceeded)
         {
             // While blinking, execute again after blinking is completed
             if (!_emotionTimer.IsEnabled) // blinking
             {                
-                ExpressEmotionAfterBlinking = () => ExpressEmotion(buildSucceeded);
+                _expressEmotionAfterBlinking = () => ExpressEmotion(buildSucceeded);
                 return;
             }
 
-            ExpressEmotionAfterBlinking = null;
+            _expressEmotionAfterBlinking = null;
 
             StopTimer();
 
@@ -236,7 +227,7 @@ namespace PronamaChanIde2019.Shells
 
             if (blinked)
             {
-                ExpressEmotionAfterBlinking?.Invoke();
+                _expressEmotionAfterBlinking?.Invoke();
             }
         }
     }

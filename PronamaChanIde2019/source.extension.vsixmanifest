@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="PronamaChanIde2019.0219ca40-44b7-48b6-b43e-af7781a22e1b" Version="2.0" Language="en-US" Publisher="jz5" />
+        <Identity Id="PronamaChanIde2019.0219ca40-44b7-48b6-b43e-af7781a22e1b" Version="2.1" Language="en-US" Publisher="jz5" />
         <DisplayName>Pronama-chan IDE</DisplayName>
         <Description xml:space="preserve">Display mascot character Pronama-chan (KUREI Kei) of Programming Live Program (pronama.jp) as the background of text editor.</Description>
         <MoreInfo>https://kei.pronama.jp/ide</MoreInfo>
