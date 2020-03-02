@@ -53,6 +53,11 @@ namespace PronamaChanIde2019.Shells
         public double DefaultWidth { get; } = 293.88;
         public double DefaultHeight { get; } = 500;
 
+        public int EmotionIntervalMin { get; set; } = 2000;
+        public int EmotionIntervalMax { get; set; } = 30000;
+        public int BlinkPercentage { get; set; } = 80;
+        public int FaceFinePercentage { get; set; } = 50;
+
         public bool EmotionTimerEnabled { get; set; } = true;
 
         public NineteenShell()
@@ -67,6 +72,32 @@ namespace PronamaChanIde2019.Shells
                 _images.Add(value, new BitmapImage(new Uri($"Images/Nineteen/{value}.png", UriKind.Relative)));
             }
 
+            // Read environment variable
+            // Emotion interval
+            if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL", EnvironmentVariableTarget.User), out int emotionInterval))
+            {
+                EmotionIntervalMax = EmotionIntervalMin = emotionInterval;
+            }
+            else if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MIN", EnvironmentVariableTarget.User), out int emotionIntervalMin))
+            {
+                EmotionIntervalMin = emotionIntervalMin;
+
+                // Max is need min
+                if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MAX", EnvironmentVariableTarget.User), out int emotionIntervalMax))
+                    EmotionIntervalMax = emotionIntervalMax >= emotionIntervalMin ? emotionIntervalMax : emotionIntervalMin;
+                else if (EmotionIntervalMin > EmotionIntervalMax)
+                    EmotionIntervalMax = EmotionIntervalMin;
+
+            }
+
+            // Blink percentage
+            if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_BLINK_PERCENTAGE", EnvironmentVariableTarget.User), out int blinkPercentage))
+                BlinkPercentage = blinkPercentage;
+
+            // Face fine percentage
+            if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_FACEFINE_PERCENTAGE", EnvironmentVariableTarget.User), out int faceFinePercentage))
+                FaceFinePercentage = faceFinePercentage;
+
             RestartTimer();
         }
 
@@ -75,7 +106,7 @@ namespace PronamaChanIde2019.Shells
         {
             if (!EmotionTimerEnabled) return;
 
-            _emotionTimer.Interval = TimeSpan.FromSeconds(_random.Next(2, 30));
+            _emotionTimer.Interval = TimeSpan.FromMilliseconds(_random.Next(EmotionIntervalMin, EmotionIntervalMax));
             _emotionTimer.Start();
         }
         private void StopTimer() => _emotionTimer.Stop();
@@ -175,13 +206,13 @@ namespace PronamaChanIde2019.Shells
             StopTimer();
             var blinked = false;
 
-            if (_random.Next(0, 10) < 8)
+            if (_random.Next(0, 100) < BlinkPercentage)
             {
                 // Blink
                 blinked = true;
                 await BlinkAsync();
             }
-            else if (_random.Next(0, 10) < 5)
+            else if (_random.Next(0, 100) < FaceFinePercentage)
             {
                 // Change face
                 FaceImage.Source = _images[Images.FaceFine];
