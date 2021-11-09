@@ -1,8 +1,9 @@
-# Pronama-chan IDE for Visual Studio 2019
+# Pronama-chan IDE for Visual Studio 2019/2022
 
 ## Download & Description
 
-https://marketplace.visualstudio.com/items?itemName=jz5.pronama-chan-ide-2019
+* 2022: https://marketplace.visualstudio.com/items?itemName=jz5.pronama-chan-ide-2022
+* 2019: https://marketplace.visualstudio.com/items?itemName=jz5.pronama-chan-ide-2019
 
 ## License
 
