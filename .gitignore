@@ -3,6 +3,14 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Exclude Auto-generated (자동생성 파일 제외)
+Thumbs.db
+**/Thumbs.db
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo
@@ -26,6 +34,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+publish/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
