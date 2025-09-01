@@ -1,4 +1,11 @@
-# Pronama-chan IDE for Visual Studio 2019/2022 (Add ARM64 support to Visual Studio 2022, Add x86 to all)
+# Pronama-chan IDE for Visual Studio 2019/2022
+
+## Support Platform
+* 2019: x64, x86
+* 2022: x64, x86, ARM64
+
+## Support Edition
+* Community, Professional, Enterprise
 
 ## Download & Description
 
