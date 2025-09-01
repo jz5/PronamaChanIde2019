@@ -1,5 +1,11 @@
 # Pronama-chan IDE for Visual Studio 2019/2022
 
+## Support ARM64
+* Visual Studio 2022
+
+## Support Edition
+* Community, Professional, Enterprise
+
 ## Download & Description
 
 * 2022: https://marketplace.visualstudio.com/items?itemName=jz5.pronama-chan-ide-2022
