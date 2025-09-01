@@ -3,22 +3,56 @@
     <Metadata>
         <Identity Id="PronamaChanIde2022.d9d4120e-6643-40f9-bf99-10e12415ace3" Version="1.0" Language="en-US" Publisher="jz5" />
         <DisplayName>Pronama-chan IDE</DisplayName>
-        <Description xml:space="preserve">Display mascot character Pronama-chan (KUREI Kei) of Programming Live Program (pronama.jp) as the background of text editor.</Description>
+        <Description xml:space="preserve">Display mascot character Pronama-chan (KUREI Kei) of Programming Live Program (pronama.jp) as the background of text editor. (support ARM64, x86)</Description>
         <MoreInfo>https://kei.pronama.jp/ide</MoreInfo>
         <Icon>icon.png</Icon>
         <PreviewImage>preview.png</PreviewImage>
         <Tags>theme, Text Editor, 痛IDE拡張, Background</Tags>
     </Metadata>
-    <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
-            <ProductArchitecture>amd64</ProductArchitecture>
-        </InstallationTarget>
-    </Installation>
+
+	<Installation>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Community">
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Pro" >
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Enterprise" >
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Ultimate" >
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Community">
+			<ProductArchitecture>arm64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Pro" >
+			<ProductArchitecture>arm64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Enterprise" >
+			<ProductArchitecture>arm64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Ultimate" >
+			<ProductArchitecture>arm64</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Community">
+			<ProductArchitecture>x86</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Pro" >
+			<ProductArchitecture>x86</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Enterprise" >
+			<ProductArchitecture>x86</ProductArchitecture>
+		</InstallationTarget>
+		<InstallationTarget Version="[17.0, )" Id="Microsoft.VisualStudio.Ultimate" >
+			<ProductArchitecture>x86</ProductArchitecture>
+		</InstallationTarget>
+	</Installation>
     <Dependencies>
-        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.7.2,)" />
     </Dependencies>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0, )" DisplayName="Visual Studio Core Editor" />
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
