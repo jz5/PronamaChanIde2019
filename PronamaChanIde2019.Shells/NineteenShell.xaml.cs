@@ -13,6 +13,9 @@ namespace PronamaChanIde2019.Shells
     /// </summary>
     public partial class NineteenShell : UserControl, ICharacterShell
     {
+        private const int MAX_EMOTION_INTERVAL = 300000;
+        private const int MAX_PERCENTAGE = 100;
+
         private enum Images
         {
             Blink1, // 通常表情（口閉じ）
@@ -67,27 +70,39 @@ namespace PronamaChanIde2019.Shells
             // Emotion interval
             if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL", EnvironmentVariableTarget.User), out int emotionInterval))
             {
-                EmotionIntervalMax = EmotionIntervalMin = emotionInterval;
+                if (emotionInterval > 0 && emotionInterval <= MAX_EMOTION_INTERVAL)
+                    EmotionIntervalMax = EmotionIntervalMin = emotionInterval;
             }
             else if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MIN", EnvironmentVariableTarget.User), out int emotionIntervalMin))
             {
-                EmotionIntervalMin = emotionIntervalMin;
+                if (emotionIntervalMin > 0 && emotionIntervalMin <= MAX_EMOTION_INTERVAL)
+                {
+                    EmotionIntervalMin = emotionIntervalMin;
 
-                // Max is need min
-                if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MAX", EnvironmentVariableTarget.User), out int emotionIntervalMax))
-                    EmotionIntervalMax = emotionIntervalMax >= emotionIntervalMin ? emotionIntervalMax : emotionIntervalMin;
-                else if (EmotionIntervalMin > EmotionIntervalMax)
-                    EmotionIntervalMax = EmotionIntervalMin;
-
+                    // Max is need min
+                    if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MAX", EnvironmentVariableTarget.User), out int emotionIntervalMax))
+                    {
+                        if (emotionIntervalMax <= MAX_EMOTION_INTERVAL)
+                            EmotionIntervalMax = emotionIntervalMax >= emotionIntervalMin ? emotionIntervalMax : emotionIntervalMin;
+                    }
+                    else if (EmotionIntervalMin > EmotionIntervalMax)
+                        EmotionIntervalMax = EmotionIntervalMin;
+                }
             }
 
             // Blink percentage
             if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_BLINK_PERCENTAGE", EnvironmentVariableTarget.User), out int blinkPercentage))
-                BlinkPercentage = blinkPercentage;
+            {
+                if (blinkPercentage >= 0 && blinkPercentage <= MAX_PERCENTAGE)
+                    BlinkPercentage = blinkPercentage;
+            }
 
             // Face fine percentage
             if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_FACEFINE_PERCENTAGE", EnvironmentVariableTarget.User), out int faceFinePercentage))
-                FaceFinePercentage = faceFinePercentage;
+            {
+                if (faceFinePercentage >= 0 && faceFinePercentage <= MAX_PERCENTAGE)
+                    FaceFinePercentage = faceFinePercentage;
+            }
 
             RestartTimer();
         }

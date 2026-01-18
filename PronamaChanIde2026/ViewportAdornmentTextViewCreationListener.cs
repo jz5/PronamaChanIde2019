@@ -27,7 +27,7 @@ namespace PronamaChanIde2026
         /// after the selection layer in the Z-order
         /// </summary>
         [Export(typeof(AdornmentLayerDefinition))]
-        [Name("Pronama_chanIDE2022")]
+        [Name("Pronama_chanIDE2026")]
         [Order(Before = PredefinedAdornmentLayers.Caret)]
         private AdornmentLayerDefinition _editorAdornmentLayer;
 
@@ -54,7 +54,7 @@ namespace PronamaChanIde2026
 
         private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
         {
-            if (_adornment != null)
+            if (_adornment?.Shell != null)
                 _adornment.Shell.ExpressEmotion(Success);
         }
     }
