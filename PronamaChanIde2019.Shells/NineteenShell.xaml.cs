@@ -73,20 +73,20 @@ namespace PronamaChanIde2019.Shells
                 if (emotionInterval > 0 && emotionInterval <= MAX_EMOTION_INTERVAL)
                     EmotionIntervalMax = EmotionIntervalMin = emotionInterval;
             }
-            else if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MIN", EnvironmentVariableTarget.User), out int emotionIntervalMin))
+            else if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MIN", EnvironmentVariableTarget.User), out int emotionIntervalMin)
+                && emotionIntervalMin > 0 && emotionIntervalMin <= MAX_EMOTION_INTERVAL)
             {
-                if (emotionIntervalMin > 0 && emotionIntervalMin <= MAX_EMOTION_INTERVAL)
-                {
-                    EmotionIntervalMin = emotionIntervalMin;
+                EmotionIntervalMin = emotionIntervalMin;
 
-                    // Max is need min
-                    if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MAX", EnvironmentVariableTarget.User), out int emotionIntervalMax))
-                    {
-                        if (emotionIntervalMax <= MAX_EMOTION_INTERVAL)
-                            EmotionIntervalMax = emotionIntervalMax >= emotionIntervalMin ? emotionIntervalMax : emotionIntervalMin;
-                    }
-                    else if (EmotionIntervalMin > EmotionIntervalMax)
-                        EmotionIntervalMax = EmotionIntervalMin;
+                if (int.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_NINETEEN_EMOTION_INTERVAL_MAX", EnvironmentVariableTarget.User), out int emotionIntervalMax)
+                    && emotionIntervalMax > 0 && emotionIntervalMax <= MAX_EMOTION_INTERVAL)
+                {
+                    EmotionIntervalMax = emotionIntervalMax;
+                }
+
+                if (EmotionIntervalMin > EmotionIntervalMax)
+                {
+                    EmotionIntervalMax = EmotionIntervalMin;
                 }
             }
 

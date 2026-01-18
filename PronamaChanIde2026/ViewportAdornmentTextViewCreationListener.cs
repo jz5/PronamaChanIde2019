@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using System.Collections.Generic;
 using EnvDTE;
 using Microsoft;
 using Microsoft.VisualStudio.Shell;
@@ -19,6 +20,8 @@ namespace PronamaChanIde2026
         [Import]
         public SVsServiceProvider ServiceProvider { get; set; }
 
+        private readonly Dictionary<IWpfTextView, ViewportAdornment> _adornments = new Dictionary<IWpfTextView, ViewportAdornment>();
+
         // Disable "Field is never assigned to..." and "Field is never used" compiler's warnings. Justification: the field is used by MEF.
 #pragma warning disable 649, 169
 
@@ -33,7 +36,6 @@ namespace PronamaChanIde2026
 
 #pragma warning restore 649, 169
 
-        private ViewportAdornment _adornment;
         private BuildEvents _buildEvents;
         /// <summary>
         /// Instantiates a ViewportAdornment manager when a textView is created.
@@ -43,7 +45,17 @@ namespace PronamaChanIde2026
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            _adornment = new ViewportAdornment(textView);
+            var adornment = new ViewportAdornment(textView);
+            _adornments[textView] = adornment;
+
+            textView.Closed += (sender, e) =>
+            {
+                if (_adornments.TryGetValue(textView, out var adornmentToDispose))
+                {
+                    adornmentToDispose.Dispose();
+                    _adornments.Remove(textView);
+                }
+            };
 
             if (ServiceProvider.GetService(typeof(DTE)) is DTE dte)
             {
@@ -54,8 +66,11 @@ namespace PronamaChanIde2026
 
         private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
         {
-            if (_adornment?.Shell != null)
-                _adornment.Shell.ExpressEmotion(Success);
+            foreach (var adornment in _adornments.Values)
+            {
+                if (adornment?.Shell != null)
+                    adornment.Shell.ExpressEmotion(Success);
+            }
         }
     }
 }
