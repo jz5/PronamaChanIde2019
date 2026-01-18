@@ -80,25 +80,16 @@ namespace PronamaChanIde2019.Shells
         public async Task Fine()
         {
             FaceImage.Source = _images[Face.Fine];
-            await Task.Factory.StartNew(() => Thread.Sleep(TimeSpan.FromSeconds(3)));
+            await Task.Delay(TimeSpan.FromSeconds(3));
         }
 
         public async Task BlinkAsync()
         {
             FaceImage.Source = _images[Face.Blink2];
-            await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(new TimeSpan(800000));
-            }).ContinueWith((x) =>
-            {
-                FaceImage.Source = _images[Face.Blink3];
-            }, TaskScheduler.FromCurrentSynchronizationContext()).ContinueWith((x) =>
-            {
-                Thread.Sleep(new TimeSpan(800000));
-            }).ContinueWith((x) =>
-            {
-                FaceImage.Source = _images[Face.Blink1];
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            await Task.Delay(TimeSpan.FromTicks(800000));
+            FaceImage.Source = _images[Face.Blink3];
+            await Task.Delay(TimeSpan.FromTicks(800000));
+            FaceImage.Source = _images[Face.Blink1];
         }
 
         public void ExpressEmotion(bool buildSucceeded)

@@ -9,8 +9,12 @@ using PronamaChanIde2019.Shells;
 
 namespace PronamaChanIde2026
 {
-    public class ViewportAdornment
+    public class ViewportAdornment : IDisposable
     {
+        private const double MAX_SHELL_SIZE = 10000;
+        private const double MIN_OPACITY = 0.01;
+        private const double MAX_OPACITY = 1.0;
+
         private readonly IWpfTextView _view;
         private readonly IAdornmentLayer _adornmentLayer;
         private readonly double _shellWidth;
@@ -39,16 +43,16 @@ namespace PronamaChanIde2026
             // Opacity
             ShellControl.Opacity = 0.4;
 
-            if (double.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_OPACITY", EnvironmentVariableTarget.User), out double opactiy))
+            if (double.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_OPACITY", EnvironmentVariableTarget.User), out double opacity))
             {
-                if (0 < opactiy && opactiy <= 1)
-                    (ShellControl).Opacity = opactiy;
+                if (opacity >= MIN_OPACITY && opacity <= MAX_OPACITY)
+                    ShellControl.Opacity = opacity;
             }
 
             // Width, Height
             var sizeInitialized = false;
             if (double.TryParse(Environment.GetEnvironmentVariable("PRONAMA-CHAN_IDE_HEIGHT", EnvironmentVariableTarget.User), out double height) &&
-                height > 0)
+                height > 0 && height <= MAX_SHELL_SIZE)
             {
                 sizeInitialized = true;
 
@@ -64,7 +68,7 @@ namespace PronamaChanIde2026
             (ShellControl).Height = _shellHeight;
 
             // Grab a reference to the adornment layer that this adornment should be added to
-            _adornmentLayer = view.GetAdornmentLayer("Pronama_chanIDE2022");
+            _adornmentLayer = view.GetAdornmentLayer("Pronama_chanIDE2026");
             _view.LayoutChanged += OnSizeChanged;
 
             //OnSizeChanged(this, EventArgs.Empty);
@@ -93,5 +97,14 @@ namespace PronamaChanIde2026
             _adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, (ShellControl), null);
         }
 
+        public void Dispose()
+        {
+            if (_view != null)
+            {
+                _view.ViewportHeightChanged -= OnSizeChanged;
+                _view.ViewportWidthChanged -= OnSizeChanged;
+                _view.LayoutChanged -= OnSizeChanged;
+            }
+        }
     }
 }
