@@ -11,6 +11,10 @@
 * 2022: https://marketplace.visualstudio.com/items?itemName=jz5.pronama-chan-ide-2022
 * 2019: https://marketplace.visualstudio.com/items?itemName=jz5.pronama-chan-ide-2019
 
+## IntelliJ IDEA / Eclipse
+
+* [PronamaChanIde](https://github.com/jz5/PronamaChanIde)
+
 ## License
 
 * Code license: MIT License: http://opensource.org/licenses/MIT
